@@ -1,5 +1,21 @@
 # Kratos Project Template
 
+
+## Update:
+
+- https://go-kratos.dev/docs/getting-started/usage
+- 指定本 repo, 指定分支: app
+
+```ruby 
+
+# 国内拉取失败可使用gitee源
+kratos new helloworld -r https://github.com/better-go/kratos-layout.git -b app 
+
+
+```
+
+
+
 ## Install Kratos
 ```
 go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
