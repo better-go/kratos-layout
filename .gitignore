@@ -34,3 +34,9 @@ bin/
 .vscode/
 .idea/
 *.swp
+
+
+# for ENT
+ent/
+!ent/schema/
+!ent/generate.go

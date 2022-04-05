@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	v1 "github.com/better-go/kratos-layout/api/helloworld/v1"
+	v1 "github.com/better-go/kratos-layout/api/v1"
 	"github.com/better-go/kratos-layout/internal/biz"
 )
 

@@ -1,0 +1,91 @@
+version: "3"
+
+#
+# sub namespace: https://taskfile.dev/#/usage?id=including-other-taskfiles
+#
+#includes:
+#  rs:
+#    taskfile: ./iDev/coding/rs/
+#    dir: ./iDev/coding/rs/
+
+#
+# global vars: https://taskfile.dev/#/usage?id=variables
+#
+vars:
+  VAR1: "some-var"
+
+# global env:
+env:
+  ENV1: testing
+
+# env file:
+#dotenv:
+#    - .env
+
+################################################################################################
+
+tasks:
+  default:
+    cmds:
+      - task: init
+      - task: run
+
+  init:
+    cmds:
+      - task: install
+      - task: proto:gen
+
+
+  install:
+    cmds:
+      - brew install cookiecutter
+      - brew install go-task/tap/go-task
+      - task --version
+      - go install github.com/cosmtrek/air@latest
+      - air -v
+
+  ################################################################################
+
+  #
+  # auto reload:
+  #
+  run:
+    cmds:
+      - air
+
+  #
+  # api test:
+  #
+  api:test:
+    cmds:
+      - curl -i 'http://127.0.0.1:8000/helloworld/kratos'
+
+  #
+  # generate protobuf files:
+  #
+  proto:gen:
+    cmds:
+      - |
+        find ./ -iname "*.proto" -exec \
+          protoc --proto_path=. \
+            --proto_path=../../../pkg/x \
+            --go_out=paths=source_relative:. \
+            --go-http_out=paths=source_relative:. \
+            --go-grpc_out=paths=source_relative:. \
+            --openapi_out==paths=source_relative:. \
+            {} \;
+
+
+  #
+  # under mac osx: kill 进程:
+  #
+  kill:
+    cmds:
+      - lsof -ti :9000 | xargs kill # rpc server
+      - lsof -ti :8000 | xargs kill # api server
+      - lsof -ti :8001 | xargs kill # admin api
+      - lsof -ti :8002 | xargs kill # job server
+
+  clean:
+    cmds:
+      - task: kill
