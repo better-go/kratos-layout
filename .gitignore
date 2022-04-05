@@ -38,5 +38,5 @@ bin/
 
 # for ENT
 ent/
-!ent/schema/
-!ent/generate.go
+!internal/data/ent/schema
+!internal/data/ent/generate.go
