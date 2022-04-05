@@ -38,7 +38,8 @@ tasks:
   tidy:
     cmds:
       - go mod tidy -v
-      - go get github.com/google/wire/cmd/wire@latest
+      - go get -u -v github.com/google/wire/cmd/wire@latest
+      - go get -u -v entgo.io/ent/cmd/ent
       - go generate ./...
 
   install:
